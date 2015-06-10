@@ -1,9 +1,19 @@
 #!/usr/bin/env python
 
+from __future__ import unicode_literals
+
 import re
 import sys
 import time
 from robobrowser import RoboBrowser
+
+if sys.version_info > (3, 0):
+  def w(str):
+    return str
+else:
+  def w(str):
+    return str.encode("utf8")
+
 
 if len(sys.argv) != 4:
     print("Usage: {} <email> <pass> <target ID>".format(sys.argv[0]))
@@ -50,11 +60,11 @@ print("more than ten friends, proceeding to get list")
 count = 0
 with open("friends", "w") as file:
     for friend in get_friends():
-        file.write("{} {}\n".format(friend["href"], friend.text))
+        file.write(w(u"{} {}\n".format(friend["href"], friend.text)))
         count += 1
     while next_page():
         for friend in get_friends():
-            file.write("{} {}\n".format(friend["href"], friend.text))
+            file.write(w(u"{} {}\n".format(friend["href"], friend.text)))
             file.flush() # just to be sure
             count += 1
 
