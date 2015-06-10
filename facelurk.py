@@ -33,7 +33,7 @@ def get_friends():
     return friends.find_all("a", href=re.compile("fref=fr_tab"))
 
 def next_page(reg=re.compile("friends.*&startindex=")):
-    link = browser.get_link("See More Friends")
+    link = browser.get_link(href=reg)
     if not link:
         return False
     browser.follow_link(link)
