@@ -58,7 +58,7 @@ while len(get_friends()) < 10:
 print("more than ten friends, proceeding to get list")
 
 count = 0
-with open("friends", "w") as file:
+with open(sys.argv[3] + "-friends", "w") as file:
     for friend in get_friends():
         file.write(w(u"{} {}\n".format(friend["href"], friend.text)))
         count += 1
